@@ -7,7 +7,7 @@
 #### 3) Section time
 
 ##### PS, Some races or even race day could be skipped when crawling. Not sure if because my computer do not have enough ram or whatever other reasons (e.g. the website is blocking).
-##### Some steps below can help ensure the completeness of the data.
+##### Some steps I took might help ensure the completeness of the data.
 
 ### Analysis
 #### The final goal is to make a database that contains all the apperance for houses that involved in races on 20150101 and onward
