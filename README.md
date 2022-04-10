@@ -15,4 +15,28 @@
 - That means I will crawl all the historical record of houses that have appeared in the interested period (20150101 - Present)
 - So form record will be larger and a race result complement will be crawled for form record normailzation
 
-#### It is a project built for profit. Therefore, leakage and overfitting are the first thing to avoid which makes this project a good project for portfolio demonstration as well.
+Updated 2022-04-10
+
+Notes on Pla/Plc/finishing order:
+
+form_record - Pla 
+>- (['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+       '13', '14', 'WV', 'WV-A', 'WX', 'PU', 'UR', 'WX-A', 'FE', 'DNF', 'TNP',
+       'DISQ', 'WXNR'])
+>- No DH
+
+race_result - Plc
+>- ['1', '2', '3', '6', '4', '5', '7', '8', '9', '10', '11', '12', '13',
+       '14', 'WV', 'WV A', '4 DH', 'PU', '5 DH', '3 DH', 'UR', '2 DH', 'WX',
+       '1 DH', 'WX A', '7 DH', '6 DH', '8 DH', '9 DH', 'FE', 'DNF', '11 DH',
+       'TNP', '10 DH', '12 DH', 'DISQ', 'WXNR']
+ 
+>- sectional_time - finishing order also have DH
+
+>- 1. Dropped VOID match and 2010/05/30 which aligned with form_record (which HKJC doesn't keep)
+>- 2. Joint race_result
+>- 3. Created prize_money table (point 2: because _key_ is used for merging instead of _date_ and _match_) after dropping VOID match and 2010/05/30 (since form_record doesn't have it neither)
+>- 4. Processed DH and every invalid entry on race_result and also sectional_time (point 1: need drop any invalid horse entry) __BUT__ preserved __Plc_PM__ on race_result in case have to divide in portion (for later calculating PM_to_date in FE)
+
+>>- __Since invalid entry is dropped here in race_result and sectional_time, prize_money is lost (since merge using key) (prize_money here is used for competitiveness proxy in FE)__
+>>- And it is where the prize_money table become useful - filling up the gap for invalid entry
